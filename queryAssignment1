@@ -1,0 +1,12 @@
+select title from film f,film_category fc, category c where f.rating="PG-13" and f.film_id=fc.film_id and fc.category_id=c.category_id and c.name="Comedy";
+
+
+select f.title, count(f.film_id) from rental r JOIN inventory i ON r.inventory_id=i.inventory_id JOIN film f ON i.film_id=f.film_id JOIN film_category fc ON f.film_id=fc.film_id JOIN category c ON fc.category_id=c.category_id where c.name="Horror" group by f.title order by count(f.film_id) desc limit 3;
+
+
+select distinct cl.name from category c, film_category fc,customer_list cl, rental r ,inventory i where cl.country="India" and cl.ID=r.customer_id and r.inventory_id=i.inventory_id and i.film_id=fc.film_id and fc.category_id=c.category_id and c.name="sports" order by cl.name;
+
+select * from customer_list cl where cl.country = 'Canada' and ID IN (SELECT r.customer_id from
+actor a,film_actor fa,inventory i,rental r where a.first_name = 'NICK' and a.last_name = 'WAHLBERG' and a.actor_id = fa.actor_id and fa.film_id = i.film_id and i.inventory_id = r.inventory_id);
+
+select count(distinct fa.film_id) from actor a, film_actor fa where a.first_name = 'SEAN' and a.last_name = 'WILLIAMS' and fa.actor_id = a.actor_id;
